@@ -13,4 +13,13 @@ public class MultipleTabsOpen extends BaseClass {
             homePage.frontPage();
             homePage.multipleWindows();
         }
+     @Test
+    public void multipleWindowsTwo(){
+        WebDriver driver=getDriver();
+        HomePage homePage=new HomePage(driver);
+        homePage.frontPageGoogle();
+        homePage.multipleWindow();
+     }
+
+
     }
