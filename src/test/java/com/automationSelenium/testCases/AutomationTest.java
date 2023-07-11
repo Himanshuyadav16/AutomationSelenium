@@ -27,6 +27,23 @@ public class AutomationTest extends BaseClass {
         driver.close();
     }
 
+    @Test
+    public void pops() {
+        WebDriver driver = getDriver();
+        HomePage homePage = new HomePage(driver);
+        homePage.frontPages();
+        homePage.pops();
+       // driver.close();
+    }
 
+    @Test
+    public void Frames() {
+        WebDriver driver = getDriver();
+        HomePage homePage = new HomePage(driver);
+        homePage.frontPageFrame();
+        homePage.iFrames();
+        // driver.close();
+
+    }
 
 }

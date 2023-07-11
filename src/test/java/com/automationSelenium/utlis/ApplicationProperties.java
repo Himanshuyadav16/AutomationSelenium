@@ -18,4 +18,14 @@ public enum ApplicationProperties {
     public String getUrl() {
         return properties.getProperty("url");
     }
+    public String getUrls() {
+        return properties.getProperty("urls");
+    }
+    public String getUrlGoogle() {
+        return properties.getProperty("urlsGoogle");
+    }
+    public  String getUrlIFrame(){
+        return  properties.getProperty("urlIFrame");
+    }
+
 }

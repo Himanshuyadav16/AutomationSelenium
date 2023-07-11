@@ -15,8 +15,5 @@ public class IFrameTest extends BaseClass {
         homePage.frontPage();
         homePage.clickSwitchAlert();
        // homePage.iFrame();
-
     }
-
-
 }
