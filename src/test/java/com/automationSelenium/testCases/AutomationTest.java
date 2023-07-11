@@ -27,7 +27,6 @@ public class AutomationTest extends BaseClass {
         driver.close();
     }
 
-
     @Test
     public void pops() {
         WebDriver driver = getDriver();
@@ -44,6 +43,7 @@ public class AutomationTest extends BaseClass {
         homePage.frontPageFrame();
         homePage.iFrames();
         // driver.close();
+
     }
 
 }

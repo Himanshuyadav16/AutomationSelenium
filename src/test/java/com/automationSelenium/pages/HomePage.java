@@ -31,6 +31,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//*[contains(span,'Close')]")
     private WebElement close;
 
+
     @FindBy(xpath = "//*[@id='wp_nav_menu-item-36814']/a/span")
     private WebElement pop;
 
@@ -63,8 +64,8 @@ public class HomePage extends BasePage {
         driver.get(baseUrl);
     }
 
-    public void clickSwitchAlert() {
-        Actions actions = new Actions(driver);
+    public void clickSwitchAlert(){
+        Actions actions=new Actions(driver);
         actions.moveToElement(overAlert).perform();
         clickAlert.click();
     }
@@ -73,19 +74,19 @@ public class HomePage extends BasePage {
         WebElement openTab = driver.findElement(By.xpath("//*[@id='footer']/div/div/div[2]"));
         openTab.findElements(By.tagName("a")).size();
         System.out.println("Total number of links are : " + openTab.findElements(By.tagName("a")).size());
+
         for (int i = 0; i < openTab.findElements(By.tagName("a")).size(); i++) {
             String openTabRepeat = Keys.chord(Keys.CONTROL, Keys.ENTER);
+
             openTab.findElements(By.tagName("a")).get(i).sendKeys(openTabRepeat);
         }
         Thread.sleep(5000);
         driver.quit();
     }
-
     public void iFrame() throws InterruptedException {
         driver.switchTo().frame("aswift_0");
         close.click();
     }
-
 
     public void frontPages() {
         driver.get(baseUrls);
@@ -134,8 +135,6 @@ public class HomePage extends BasePage {
         Select select=new Select(iFrame);
         select.selectByValue("Home");
 
-
     }
-
 
 }
