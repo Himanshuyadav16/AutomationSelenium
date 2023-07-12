@@ -37,11 +37,11 @@ public class AutomationTest extends BaseClass {
     }
 
     @Test
-    public void Frames() {
+    public void Frames() throws InterruptedException {
         WebDriver driver = getDriver();
         HomePage homePage = new HomePage(driver);
-        homePage.frontPageFrame();
         homePage.iFrames();
+
         // driver.close();
 
     }

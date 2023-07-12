@@ -47,13 +47,50 @@ public class HomePage extends BasePage {
     @FindBy(id = "message-e0babd8d-9e08-437f-890a-d91f17aa48ae")
     private WebElement message;
 
-
     @FindBy(xpath = "//*[@id='hsForm_e0babd8d-9e08-437f-890a-d91f17aa48ae']/div/div[2]/input")
     private WebElement submit;
 
-    @FindBy(id = "frm1")
+    @FindBy(xpath = "//*[@id='selectnav1']")
     private WebElement iFrame;
 
+    @FindBy(xpath = "//*[@id='frm1']")
+    private WebElement iFrameMenu;
+
+    @FindBy(id = "selectnav1")
+    private WebElement frameSelect;
+
+
+    @FindBy(id = "frm2")
+    private WebElement iframeMenuSecond;
+
+    @FindBy(id = "selectnav1")
+    private WebElement frameSelectSecond;
+
+    @FindBy(id = "firstName")
+    private WebElement firstNameHY;
+    @FindBy(id = "lastName")
+    private WebElement lastNameHy;
+    @FindBy(id = "femalerb")
+    private WebElement female;
+    @FindBy(id = "englishchbx")
+    private WebElement english;
+    @FindBy(id = "hindichbx")
+    private WebElement hindi;
+
+    @FindBy(id = "email")
+    private WebElement emailHy;
+
+    @FindBy(id = "password")
+    private WebElement password;
+
+    @FindBy(id = "frm3")
+    private WebElement frameThird;
+
+    @FindBy(id = "selectnav1")
+    private WebElement frameSelectThird;
+
+    @FindBy(id="selectnav2")
+    private WebElement thirdFrameMenuFromFistFrame;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -64,8 +101,8 @@ public class HomePage extends BasePage {
         driver.get(baseUrl);
     }
 
-    public void clickSwitchAlert(){
-        Actions actions=new Actions(driver);
+    public void clickSwitchAlert() {
+        Actions actions = new Actions(driver);
         actions.moveToElement(overAlert).perform();
         clickAlert.click();
     }
@@ -83,6 +120,7 @@ public class HomePage extends BasePage {
         Thread.sleep(5000);
         driver.quit();
     }
+
     public void iFrame() throws InterruptedException {
         driver.switchTo().frame("aswift_0");
         close.click();
@@ -121,20 +159,62 @@ public class HomePage extends BasePage {
 
     }
 
-    public void frontPageFrame() {
+    public void iFrames() throws InterruptedException {
         driver.get(BaseUrlIFrame);
+        driver.switchTo().frame(iFrameMenu);
+        iFrame.click();
+        Select frame = new Select(frameSelect);
+        frame.selectByVisibleText("- Java");
+
+        driver.switchTo().defaultContent();
+
+        driver.switchTo().frame("frm2");
+
+        Select frameSel = new Select(frameSelectSecond);
+        frameSel.selectByVisibleText("- Basic Controls");
+        firstNameHY.sendKeys("userName");
+        lastNameHy.sendKeys("lastName");
+        female.click();
+        english.click();
+        hindi.click();
+        emailHy.sendKeys("user12@gmail.com");
+        password.sendKeys("UserEnjoy12@");
+
+        driver.switchTo().defaultContent();
+
+        driver.switchTo().frame("frm3");
+        // frameSelectThird.click();
+
+
+        driver.switchTo().frame("frm2");
+        Select frameSele = new Select(frameSelectSecond);
+        frameSele.selectByVisibleText("- Basic Controls");
+        firstNameHY.sendKeys("userName");
+        lastNameHy.sendKeys("lastName");
+        female.click();
+        english.click();
+        hindi.click();
+        emailHy.sendKeys("user12@gmail.com");
+        password.sendKeys("UserEnjoy12@");
+        driver.switchTo().defaultContent();
+
+        driver.switchTo().frame(iFrameMenu);
+        iFrame.click();
+        Select frameOne = new Select(frameSelect);
+        frameOne.selectByVisibleText("- Java");
+        driver.switchTo().defaultContent();
+
+        driver.switchTo().frame("frm3");
+        thirdFrameMenuFromFistFrame.click();
+        Select menuSel = new Select(thirdFrameMenuFromFistFrame);
+        menuSel.selectByVisibleText("Home");
+
+
+
+
+
+
+
+
     }
-
-    public void iFrames() {
-        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("frm1")));
-        int size = driver.findElements(By.id("frm1")).size();
-        System.out.println("Total Frames " + size);
-        driver.switchTo().frame(0);
-
-        Select select=new Select(iFrame);
-        select.selectByValue("Home");
-
-    }
-
 }
