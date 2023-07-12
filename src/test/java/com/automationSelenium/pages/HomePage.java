@@ -1,10 +1,7 @@
 package com.automationSelenium.pages;
 
 import com.automationSelenium.utlis.ApplicationProperties;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -14,6 +11,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
 
 
 public class HomePage extends BasePage {
@@ -68,12 +66,16 @@ public class HomePage extends BasePage {
 
     @FindBy(id = "firstName")
     private WebElement firstNameHY;
+
     @FindBy(id = "lastName")
     private WebElement lastNameHy;
+
     @FindBy(id = "femalerb")
     private WebElement female;
+
     @FindBy(id = "englishchbx")
     private WebElement english;
+
     @FindBy(id = "hindichbx")
     private WebElement hindi;
 
@@ -89,13 +91,118 @@ public class HomePage extends BasePage {
     @FindBy(id = "selectnav1")
     private WebElement frameSelectThird;
 
-    @FindBy(id="selectnav2")
+    @FindBy(id = "selectnav2")
     private WebElement thirdFrameMenuFromFistFrame;
+
+    @FindBy(id = "input")
+    private WebElement searchButton;
+
+    @FindBy(id = "APjFqb")
+    private WebElement googleSearchText;
+
+    @FindBy(name = "btnK")
+    private WebElement googleSearchButton;
+
+    @FindBy(xpath = "//*[contains(h3,'YouTube')]")
+    private WebElement selectYoutubeSite;
+
+    @FindBy(xpath = "//*[contains(a,'7.8.0')]")
+    private WebElement selectTestNGVersion;
+
+    @FindBy(name = "search_query")
+    private WebElement youtubeSearchBox;
+
+    @FindBy(xpath = "//*[contains(h3,'org.testng')]")
+    private WebElement selectTestNGSite;
+
+
+    @FindBy(xpath = "//*[@id='search-icon-legacy']/yt-icon/yt-icon-shape/icon-shape/div")
+    private WebElement searchYoutubeButton;
+
 
     public HomePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
+
+    public void multipleWindowsLoop() throws InterruptedException {
+        driver.get(BaseUrlGoogle);
+        googleSearchText.sendKeys("youtube");
+        Thread.sleep(1000);
+        String currentTab = driver.getWindowHandle();
+
+        driver.switchTo().newWindow(WindowType.TAB);
+        driver.navigate().to("https://www.google.com/");
+        googleSearchText.sendKeys("testng maven dependency");
+
+        for (String tab : driver.getWindowHandles()) {
+            if (!tab.equals(currentTab)) {
+                Thread.sleep(1000);
+                googleSearchButton.click();
+
+                driver.switchTo().window(currentTab);
+                Thread.sleep(2000);
+                googleSearchButton.click();
+                Thread.sleep(2000);
+                selectYoutubeSite.click();
+
+                driver.switchTo().window(tab);
+                selectTestNGSite.click();
+
+                driver.switchTo().window(currentTab);
+                Thread.sleep(2000);
+                youtubeSearchBox.sendKeys("Vedio song");
+
+                driver.switchTo().window(tab);
+                selectTestNGVersion.click();
+
+                driver.switchTo().window(currentTab);
+                Thread.sleep(2000);
+                searchYoutubeButton.click();
+
+            }
+
+        }
+
+
+
+    }
+    public void multipleWindow() throws InterruptedException {
+        driver.get(BaseUrlGoogle);
+        googleSearchText.sendKeys("youtube");
+
+        driver.switchTo().newWindow(WindowType.TAB);
+        driver.navigate().to("https://www.google.com/");
+        googleSearchText.sendKeys("testng maven dependency");
+        Thread.sleep(1000);
+        googleSearchButton.click();
+        Thread.sleep(2000);
+
+        ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
+
+        driver.switchTo().window(newTab.get(0));
+        Thread.sleep(2000);
+        googleSearchButton.click();
+        Thread.sleep(2000);
+        selectYoutubeSite.click();
+
+        driver.switchTo().window(newTab.get(1));
+        selectTestNGSite.click();
+
+        driver.switchTo().window(newTab.get(0));
+        Thread.sleep(3000);
+        youtubeSearchBox.sendKeys("Vedio song");
+
+        driver.switchTo().window(newTab.get(1));
+        Thread.sleep(3000);
+        selectTestNGVersion.click();
+
+        driver.switchTo().window(newTab.get(0));
+        Thread.sleep(3000);
+        searchYoutubeButton.click();
+         driver.quit();
+    }
+
 
     public void frontPage() {
         driver.get(baseUrl);
@@ -150,14 +257,6 @@ public class HomePage extends BasePage {
 
     }
 
-    public void frontPageGoogle() {
-        driver.get(BaseUrlGoogle);
-    }
-
-    public void multipleWindow() {
-
-
-    }
 
     public void iFrames() throws InterruptedException {
         driver.get(BaseUrlIFrame);
@@ -209,6 +308,9 @@ public class HomePage extends BasePage {
         Select menuSel = new Select(thirdFrameMenuFromFistFrame);
         menuSel.selectByVisibleText("Home");
 
-        
+
     }
 }
+
+
+//https://www.tutorialspoint.com/switch-tabs-using-selenium-webdriver-with-java
