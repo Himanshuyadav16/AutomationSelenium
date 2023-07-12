@@ -209,12 +209,6 @@ public class HomePage extends BasePage {
         Select menuSel = new Select(thirdFrameMenuFromFistFrame);
         menuSel.selectByVisibleText("Home");
 
-
-
-
-
-
-
-
+        
     }
 }
