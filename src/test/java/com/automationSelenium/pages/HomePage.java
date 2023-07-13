@@ -91,6 +91,7 @@ public class HomePage extends BasePage {
     @FindBy(id = "selectnav1")
     private WebElement frameSelectThird;
 
+
     @FindBy(id = "selectnav2")
     private WebElement thirdFrameMenuFromFistFrame;
 
@@ -257,7 +258,6 @@ public class HomePage extends BasePage {
 
     }
 
-
     public void iFrames() throws InterruptedException {
         driver.get(BaseUrlIFrame);
         driver.switchTo().frame(iFrameMenu);
@@ -312,5 +312,3 @@ public class HomePage extends BasePage {
     }
 }
 
-
-//https://www.tutorialspoint.com/switch-tabs-using-selenium-webdriver-with-java
