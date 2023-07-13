@@ -25,7 +25,7 @@ public class AlertPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public void alertButton() {
+    public void alertButton() throws InterruptedException {
         driver.navigate().refresh();
         driver.navigate().back();
         HomePage homePage = new HomePage(driver);
