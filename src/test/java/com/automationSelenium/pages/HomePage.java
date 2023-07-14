@@ -121,9 +121,131 @@ public class HomePage extends BasePage {
     private WebElement searchYoutubeButton;
 
 
+    @FindBy(css = "input[placeholder='First Name']")
+    private WebElement firstNameSeleniumSite;
+
+    @FindBy(css = "input[placeholder='Last Name']")
+    private WebElement lastNameSeleniumSite;
+
+    @FindBy(css = "textarea[ng-model='Adress']")
+    private WebElement address;
+
+    @FindBy(css = "input[type='email']")
+    private WebElement emailSeleniumSite;
+
+    @FindBy(css = "input[type='tel']")
+    private WebElement phoneNumber;
+
+    @FindBy(css = "input[value='FeMale']")
+    private WebElement gender;
+
+    @FindBy(css = "input[value='Cricket']")
+    private WebElement selectCricket;
+
+    @FindBy(css = "input[value='Movies']")
+    private WebElement selectMovies;
+
+    @FindBy(id = "msdd")
+    private WebElement language;
+
+    @FindBy(xpath = "//*[contains(a,'English')]")
+    private WebElement selectEnglish;
+
+    @FindBy(xpath = "//*[contains(a,'Hindi')]")
+    private WebElement selectHindi;
+
+    @FindBy(xpath = "//*[contains(label,'Languages')]")
+    private WebElement outside;
+
+    @FindBy(id = "Skills")
+    private WebElement setSkills;
+
+    @FindBy(css = "span[role='combobox']")
+    private WebElement selectCountry;
+
+    @FindBy(css = "input[type='search']")
+    private WebElement searchCountry;
+
+    @FindBy(css = "li[role='treeitem']")
+    private WebElement selectCountryAfterSearch;
+
+    @FindBy(id = "yearbox")
+    private WebElement selectYear;
+
+    @FindBy(css = "select[placeholder='Month']")
+    private WebElement selectMonth;
+
+    @FindBy(id = "daybox")
+    private WebElement selectDate;
+
+    @FindBy(id = "firstpassword")
+    private WebElement firstPassword;
+
+    @FindBy(id = "secondpassword")
+    private WebElement secondpassword;
+
+    @FindBy(id = "submitbtn")
+    private WebElement submitButton;
+
+
     public HomePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
+    }
+
+    public void frontPage() throws InterruptedException {
+        driver.get(baseUrl);
+
+        Thread.sleep(3000);
+
+        firstNameSeleniumSite.sendKeys("userName");
+        lastNameSeleniumSite.sendKeys("lastName");
+        address.sendKeys("U.S.A.");
+        emailSeleniumSite.sendKeys("username12@gmail.com");
+        phoneNumber.sendKeys("8987654567");
+        gender.click();
+
+        Thread.sleep(1000);
+        selectCricket.click();
+
+        Thread.sleep(1000);
+        selectMovies.click();
+
+        language.click();
+
+        selectEnglish.click();
+        Thread.sleep(1000);
+
+        selectHindi.click();
+        Thread.sleep(1000);
+        outside.click();
+
+        Thread.sleep(3000);
+       // setSkills.click();
+        Select selectSkills = new Select(setSkills);
+        selectSkills.selectByValue("Adobe InDesign");
+
+        selectCountry.click();
+        searchCountry.sendKeys("india");
+        selectCountryAfterSearch.click();
+
+        selectYear.click();
+        Select selectedYear=new Select(selectYear);
+        selectedYear.selectByValue("1990");
+
+        selectMonth.click();
+        Select selectedMonth=new Select(selectMonth);
+        selectedMonth.selectByValue("July");
+
+        selectDate.click();
+        Select selectedDay=new Select(selectDate);
+        selectedDay.selectByValue("7");
+        firstPassword.sendKeys("UserName123@");
+        secondpassword.sendKeys("UserName123@");
+
+        submitButton.click();
+
+
     }
 
     public void multipleWindowsLoop() throws InterruptedException {
@@ -166,8 +288,8 @@ public class HomePage extends BasePage {
         }
 
 
-
     }
+
     public void multipleWindow() throws InterruptedException {
         driver.get(BaseUrlGoogle);
         googleSearchText.sendKeys("youtube");
@@ -201,13 +323,9 @@ public class HomePage extends BasePage {
         driver.switchTo().window(newTab.get(0));
         Thread.sleep(3000);
         searchYoutubeButton.click();
-         driver.quit();
+        driver.quit();
     }
 
-
-    public void frontPage() {
-        driver.get(baseUrl);
-    }
 
     public void clickSwitchAlert() {
         Actions actions = new Actions(driver);

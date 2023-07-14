@@ -9,11 +9,11 @@ import org.testng.annotations.Test;
 public class AutomationTest extends BaseClass {
 
     @Test
-    public void homePageTest() {
+    public void homePageTest() throws InterruptedException {
         WebDriver driver = getDriver();
         HomePage homePage = new HomePage(driver);
         homePage.frontPage();
-        driver.close();
+       // driver.close();
     }
     @Test
     public void alertPage() throws InterruptedException {
@@ -41,9 +41,8 @@ public class AutomationTest extends BaseClass {
         WebDriver driver = getDriver();
         HomePage homePage = new HomePage(driver);
         homePage.iFrames();
-
         // driver.close();
-
     }
+
 
 }
