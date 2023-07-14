@@ -5,12 +5,8 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.ArrayList;
 
 
@@ -19,7 +15,6 @@ public class HomePage extends BasePage {
     public String baseUrls = ApplicationProperties.INSTANCE.getUrls();
     public String BaseUrlGoogle = ApplicationProperties.INSTANCE.getUrlGoogle();
     public String BaseUrlIFrame = ApplicationProperties.INSTANCE.getUrlIFrame();
-
 
     @FindBy(xpath = "//*[contains(a,'SwitchTo')]")
     private WebElement overAlert;
@@ -187,10 +182,63 @@ public class HomePage extends BasePage {
     @FindBy(id = "submitbtn")
     private WebElement submitButton;
 
+    @FindBy(xpath = "//*[contains(a,'Interactions ')]")
+    private  WebElement interActions;
+
+    @FindBy(xpath = "//*[contains(a,'Drag and Drop ')]")
+    private  WebElement dragDrop;
+
+    @FindBy(xpath = "//*[contains(a,'Static ')]")
+    private  WebElement moveStatic ;
+
+    @FindBy(name = "google_esf")
+    private WebElement IFrameName;
+
+    @FindBy(className = "ns-ka7cj-e-18")
+    private  WebElement closeButton ;
+
+    @FindBy(xpath = "//*[contains(a,'More')]")
+    private  WebElement more ;
+
+    @FindBy(xpath = "//*[contains(a,'Modals')]")
+    private  WebElement modals;
+
+    @FindBy(className = "ns-ka7cj-e-16")
+    private  WebElement closeAdButton ;
 
     public HomePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
+    }
+
+    public  void modal() throws InterruptedException {
+        driver.get(baseUrl);
+        Actions actions=new Actions(driver);
+        Thread.sleep(3000);
+        actions.moveToElement(more).perform();
+        Thread.sleep(3000);
+        actions.moveToElement(modals).perform();
+        Thread.sleep(3000);
+        modals.click();
+        Thread.sleep(3000);
+        closeAdButton.click();
+    }
+
+    public void interActions() throws InterruptedException {
+        driver.get(baseUrl);
+        Actions actions=new Actions(driver);
+        Thread.sleep(3000);
+        actions.moveToElement(interActions).perform();
+        Thread.sleep(3000);
+        actions.moveToElement(dragDrop).perform();
+        Thread.sleep(3000);
+        actions.moveToElement(moveStatic).perform();
+        Thread.sleep(3000);
+        moveStatic.click();
+        driver.switchTo().frame("google_esf");
+        driver.switchTo().defaultContent();
+        Thread.sleep(3000);
+       closeButton.click();
     }
 
     public void frontPage() throws InterruptedException {
@@ -242,10 +290,7 @@ public class HomePage extends BasePage {
         selectedDay.selectByValue("7");
         firstPassword.sendKeys("UserName123@");
         secondpassword.sendKeys("UserName123@");
-
         submitButton.click();
-
-
     }
 
     public void multipleWindowsLoop() throws InterruptedException {
@@ -284,10 +329,7 @@ public class HomePage extends BasePage {
                 searchYoutubeButton.click();
 
             }
-
         }
-
-
     }
 
     public void multipleWindow() throws InterruptedException {
