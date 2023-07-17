@@ -27,5 +27,9 @@ public enum ApplicationProperties {
     public  String getUrlIFrame(){
         return  properties.getProperty("urlIFrame");
     }
+    public  String getUrlIdeaForGetch(){
+        return properties.getProperty("urlIdeaForgetech");
+    }
+
 
 }

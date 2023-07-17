@@ -44,5 +44,19 @@ public class AutomationTest extends BaseClass {
         // driver.close();
     }
 
+    @Test
+    public void interAction() throws InterruptedException{
+        WebDriver driver=getDriver();
+        HomePage homePage=new HomePage(driver);
+        homePage.interActions();
+    }
+
+    @Test
+    public void modals() throws InterruptedException {
+        WebDriver driver=getDriver();
+        HomePage homePage=new HomePage(driver);
+        homePage.modal();
+    }
+
 
 }
